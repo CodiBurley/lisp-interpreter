@@ -17,7 +17,8 @@
  */
 #include <string>
 #include <vector>
-#include<iostream>
+#include <iostream>
+#include <algorithm>
 #include "SExp.h"
 
 using std::string;
