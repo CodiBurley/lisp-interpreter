@@ -11,6 +11,11 @@ using std::vector;
 
 int main() {
   string testStr = "(func . (1 . hello))";
-  input(testStr);
+  string testStr1 = "hello";
+  SExp* s = input(testStr);
+  std::cout << "SExp symbol: " << std::endl;
+  if (s->type == Symbol) {
+    std::cout << s->name << std::endl;
+  }
   return 0;
 }

@@ -39,11 +39,12 @@ vector<string> tokenizeToStrs(const string& strInput, const string& strDelims)
  string strOne = strInput;
  string delimiters = strDelims;
 
- int startpos = 0;
- int pos = strOne.find_first_of(delimiters, startpos);
+ size_t startpos = 0;
+ size_t pos = strOne.find_first_of(delimiters, startpos);
 
- while (string::npos != pos || string::npos != startpos)
+ while (string::npos != pos && string::npos != startpos)
  {
+  std::cout << "in while loop" << std::endl;
   if(strOne.substr(startpos, pos - startpos) != "")
    vS.push_back(strOne.substr(startpos, pos - startpos));
 
@@ -62,6 +63,14 @@ vector<string> tokenizeToStrs(const string& strInput, const string& strDelims)
    pos = strOne.find_first_of(delimiters, startpos);
 
  }
+
+ if (!vS.size()) vS.push_back(strInput);
+
+ std::cout << "TOKENS:" << std::endl;
+ for (string s: vS) {
+  std::cout << s << std::endl;
+ }
+ std::cout << "END TOKENS" << std::endl;
 
  return vS;
 }
@@ -89,13 +98,41 @@ vector<Token> tokenize(string s) {
   return tokenStringsToTokenEnums(tokenizeToStrs(s, "( .)"));
 }
 
+size_t nextNonWhite(vector<Token> ts, size_t from) {
+  if (ts.size() < from) return ts.size();
+  vector<Token>::iterator it = std::find_if(
+      ts.begin() + from,
+      ts.end(),
+      [](Token t) { return t.type != White; }
+  );
+  return (it == ts.end()) ? ts.size() : std::distance(ts.begin(), it);
+}
 
-// TODO put input in its own file
-void input(string s) {
+SExp* input(string s) {
   vector<Token> tokens = tokenize(s);
-  for (Token t : tokens) {
-    if (t.type == ID) {
-      findOrCreateSymbolic(t.value);
+  std::cout << tokens.at(0).value << std::endl;
+  if (!tokens.size()) return new SExp("NIL");
+  Token firstToken = tokens.at(0);
+
+  switch(firstToken.type) {
+    case ID: {
+      std::cout << "creating symbol" << std::endl;
+      return findOrCreateSymbolic(firstToken.value);
+      break;
+    }
+    case LParen: {
+      size_t nextTokenIdx = nextNonWhite(tokens, 1);
+      if (nextTokenIdx == tokens.size()) return new SExp("ERR"); // error
+
+      Token nextToken = tokens.at(nextTokenIdx);
+      if (nextToken.type == Invalid || nextToken.type == Dot) return new SExp("ERR"); // error
+      else if (nextToken.type == RParen) return new SExp("NIL"); // acually nil
+      return new SExp("ERR");
+      break;
+    }
+    default: {
+      return new SExp("ERR"); // error
+      break;
     }
   }
 }
