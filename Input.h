@@ -17,12 +17,17 @@
  */
 #include <string>
 #include <vector>
+#include <set>
 #include <iostream>
 #include <algorithm>
 #include "SExp.h"
 
 using std::string;
 using std::vector;
+
+
+const std::set<string> WHITE_SPACE_CHARS = { " ", "\n", "\t" };
+bool isWhite(string s) { return WHITE_SPACE_CHARS.count(s) != 0; }
 
 enum TokenType { LParen, RParen, Dot, White, ID, Num, Invalid };
 struct Token {
@@ -32,8 +37,19 @@ struct Token {
   string value;
 };
 
-vector<string> tokenizeToStrs(const string& strInput, const string& strDelims)
-{
+// PROTOTYPES
+SExp* input(string s);
+SExp* input(vector<Token> tokens);
+SExp* inputList(vector<Token> tokens);
+
+void printTokens(vector<Token> tokens) {
+  for (Token t: tokens) {
+    std::cout << "'"<< t.value << "' ";
+  }
+  std::cout << std::endl;
+}
+
+vector<string> tokenizeToStrs(const string& strInput, const string& strDelims) {
  vector<string> vS;
 
  string strOne = strInput;
@@ -44,33 +60,19 @@ vector<string> tokenizeToStrs(const string& strInput, const string& strDelims)
 
  while (string::npos != pos && string::npos != startpos)
  {
-  std::cout << "in while loop" << std::endl;
-  if(strOne.substr(startpos, pos - startpos) != "")
+  if(strOne.substr(startpos, pos - startpos) != "" && !isWhite(strOne.substr(startpos, pos - startpos)))
    vS.push_back(strOne.substr(startpos, pos - startpos));
 
-  // if delimiter is a new line (\n) then addt new line
-  if(strOne.substr(pos, 1) == "\n")
-   vS.push_back("\\n");
-  // else if the delimiter is not a space
-  else if (strOne.substr(pos, 1) != " ")
+  if (!isWhite(strOne.substr(pos, 1))) {
    vS.push_back(strOne.substr(pos, 1));
+  }
 
-  if( string::npos == strOne.find_first_not_of(delimiters, pos) )
-   startpos = strOne.find_first_not_of(delimiters, pos);
-  else
    startpos = pos + 1;
 
    pos = strOne.find_first_of(delimiters, startpos);
-
  }
 
  if (!vS.size()) vS.push_back(strInput);
-
- std::cout << "TOKENS:" << std::endl;
- for (string s: vS) {
-  std::cout << s << std::endl;
- }
- std::cout << "END TOKENS" << std::endl;
 
  return vS;
 }
@@ -84,10 +86,10 @@ bool isNumber(const std::string& s) {
 vector<Token> tokenStringsToTokenEnums(vector<string> strs) {
   vector<Token> enums(strs.size());
   std::transform(strs.begin(), strs.end(), enums.begin(), [](string s) {
-    if (s == "(") return Token(LParen);
-    else if (s == ")") return Token(RParen);
-    else if (s == ".") return Token(Dot);
-    else if (s == " " || s == "\t" || s == "\r" || s == "\n") return Token(White);
+    if (s == "(") return Token(LParen, s);
+    else if (s == ")") return Token(RParen, s);
+    else if (s == ".") return Token(Dot, s);
+    else if (s == " " || s == "\t" || s == "\r" || s == "\n") return Token(White, s);
     else if (isNumber(s)) return Token(Num, s);
     else return Token(ID, s);
   });
@@ -95,11 +97,11 @@ vector<Token> tokenStringsToTokenEnums(vector<string> strs) {
 }
 
 vector<Token> tokenize(string s) {
-  return tokenStringsToTokenEnums(tokenizeToStrs(s, "( .)"));
+  return tokenStringsToTokenEnums(tokenizeToStrs(s, "( \n\t\r.)"));
 }
 
 size_t nextNonWhite(vector<Token> ts, size_t from) {
-  if (ts.size() < from) return ts.size();
+  if (ts.size() <= from) return ts.size();
   vector<Token>::iterator it = std::find_if(
       ts.begin() + from,
       ts.end(),
@@ -108,31 +110,126 @@ size_t nextNonWhite(vector<Token> ts, size_t from) {
   return (it == ts.end()) ? ts.size() : std::distance(ts.begin(), it);
 }
 
-SExp* input(string s) {
-  vector<Token> tokens = tokenize(s);
-  std::cout << tokens.at(0).value << std::endl;
-  if (!tokens.size()) return new SExp("NIL");
+size_t nextTokenOutsideParens(vector<Token> ts, size_t from, size_t startingOpenParens = 0) {
+  if (ts.size() <= from) return ts.size();
+
+  if (startingOpenParens == 0 && ts.at(from).type != LParen) return from;
+
+  int openParens = startingOpenParens;
+  size_t currentTokenIdx = from;
+
+  do {
+    Token currentToken = ts.at(currentTokenIdx);
+    if (currentToken.type == LParen) openParens++;
+    else if (currentToken.type == RParen) openParens--;
+    currentTokenIdx++;
+  } while (openParens > 0 && currentTokenIdx < ts.size());
+
+  return currentTokenIdx;
+}
+
+size_t nextClosingParen(vector<Token> ts, size_t from) {
+  if (ts.size() <= from) return ts.size();
+
+  vector<Token>::iterator it = std::find_if(
+      ts.begin() + from,
+      ts.end(),
+      [](Token t) { return t.type == RParen; }
+  );
+  return (it == ts.end()) ? ts.size() : std::distance(ts.begin(), it);
+}
+
+
+SExp* input(vector<Token> tokens) {
+  if (!tokens.size()) return new SExp(Error("no input given"));
   Token firstToken = tokens.at(0);
 
   switch(firstToken.type) {
     case ID: {
-      std::cout << "creating symbol" << std::endl;
+      //std::cout << "creating symbol" << std::endl;
+      if (tokens.size() > 1) return new SExp(Error("unexpected " + tokens.at(1).value));
       return findOrCreateSymbolic(firstToken.value);
-      break;
+    }
+    case Num: {
+      return new SExp(std::stoi(firstToken.value));
     }
     case LParen: {
       size_t nextTokenIdx = nextNonWhite(tokens, 1);
-      if (nextTokenIdx == tokens.size()) return new SExp("ERR"); // error
+      if (nextTokenIdx == tokens.size()) return new SExp(Error("missing closing paren")); // error
 
       Token nextToken = tokens.at(nextTokenIdx);
-      if (nextToken.type == Invalid || nextToken.type == Dot) return new SExp("ERR"); // error
-      else if (nextToken.type == RParen) return new SExp("NIL"); // acually nil
-      return new SExp("ERR");
-      break;
+      if (nextToken.type == Invalid || nextToken.type == Dot) return new SExp(Error("unexpected " + nextToken.value)); // error
+      else if (nextToken.type == RParen) return findOrCreateSymbolic("NIL"); // acually nil
+
+      size_t startingOpenParens = (nextToken.type == LParen) ? 1 : 0;
+      size_t nextTokenOutParensIdx = nextTokenOutsideParens(tokens, nextTokenIdx + 1, startingOpenParens);
+      if (nextTokenOutParensIdx == tokens.size()) return new SExp(Error("missing closing paren")); // error
+
+      Token nextTokenOutParens = tokens.at(nextTokenOutParensIdx);
+      if (nextTokenOutParens.type == Dot) {
+        size_t nextRightTokenOutParensIdx = nextTokenOutsideParens(tokens,
+            nextTokenOutParensIdx + 1);
+        size_t nextClosingParenIdx = nextClosingParen(tokens, nextRightTokenOutParensIdx);
+        vector<Token> leftTokens(tokens.begin() + nextTokenIdx,
+            tokens.begin() + nextTokenOutParensIdx);
+        vector<Token> rightTokens(tokens.begin() + nextTokenOutParensIdx + 1, --tokens.end());
+        //std::cout << "FOR TOKENS: ";
+        //printTokens(tokens);
+        //std::cout << "-- LEFT --" << std::endl;
+        //printTokens(leftTokens);
+        //std::cout << "-- RIGHT --" << std::endl;
+        //printTokens(rightTokens);
+        //std::cout << "-- END LEFT RIGHT --" << std::endl;
+        return cons(input(leftTokens), input(rightTokens));
+      } else {
+        vector<Token> tokensLessOpenParen(++tokens.begin(), tokens.end());
+        return inputList(tokensLessOpenParen);
+      }
+
+      return new SExp(Error("internal error"));
     }
     default: {
-      return new SExp("ERR"); // error
-      break;
+      return new SExp(Error("SExp can only start with (, number, or id")); // error
     }
   }
+}
+
+SExp* inputList(vector<Token> tokens) {
+  Token firstToken = tokens.at(0);
+
+  switch(firstToken.type) {
+    case RParen: {
+      if (tokens.size() > 1) return new SExp(Error("unexpected " + tokens.at(1).value));
+      return findOrCreateSymbolic("NIL");
+    }
+    case ID: {
+      vector<Token> rest(++tokens.begin(), tokens.end());
+      return cons(findOrCreateSymbolic(firstToken.value), inputList(rest));
+    }
+    case Num: {
+      vector<Token> rest(++tokens.begin(), tokens.end());
+      return cons(new SExp(std::stoi(firstToken.value)), inputList(rest));
+    }
+    case LParen: {
+      size_t closingParenIdx = nextClosingParen(tokens, 1);
+      if (closingParenIdx == tokens.size()) return new SExp(Error("missing closing paren"));
+
+      vector<Token> nextItemTokens(tokens.begin(), tokens.begin() + closingParenIdx + 1);
+      vector<Token> rest(tokens.begin() + closingParenIdx + 1, tokens.end());
+      //std::cout << "Item: " << std::endl;
+      //printTokens(nextItemTokens);
+      //std::cout << "Rest: " << std::endl;
+      //printTokens(rest);
+
+      return cons(input(nextItemTokens), inputList(rest));
+    }
+    default: {
+      return new SExp(Error("unexpected token '" + firstToken.value + "' in list"));
+    }
+  }
+}
+
+SExp* input(string s) {
+  vector<Token> tokens = tokenize(s);
+  return input(tokens);
 }
