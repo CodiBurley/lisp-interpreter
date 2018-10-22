@@ -15,18 +15,25 @@ int main() {
   //string testStr1 = "(hey. (sister . (brother . mother )))";
   //string testL = "((hey hoe) . 3)";
   //SExp* s = input(testL);
-  string expStr;
-  while (std::getline(std::cin, expStr)) {
-    if (expStr == "$") {
+  string readStr;
+  string expStr = "";
+  while (std::getline(std::cin, readStr)) {
+    if (readStr == "$") {
+      SExp* s = input(expStr);
+      string out = output(s);
+      std::cout << "in: " << expStr << std::endl;
+      std::cout << "> " << out << std::endl;
+      expStr = "";
       continue;
-    } else if (expStr == "$$") {
+    } else if (readStr == "$$") {
+      SExp* s = input(expStr);
+      string out = output(s);
+      std::cout << "in: " << expStr << std::endl;
+      std::cout << "> " << out << std::endl;
       std::cout << "BYE!" << std::endl;
       return 0;
     }
-    SExp* s = input(expStr);
-    string out = output(s);
-    std::cout << "in: " << expStr << std::endl;
-    std::cout << "> " << out << std::endl;
+    expStr = expStr + " " + readStr;
   }
   //std::cout << "SExp symbol: " << std::endl;
   //if (s->type == Symbol) {

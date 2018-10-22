@@ -211,7 +211,8 @@ SExp* inputList(vector<Token> tokens) {
       return cons(new SExp(std::stoi(firstToken.value)), inputList(rest));
     }
     case LParen: {
-      size_t closingParenIdx = nextClosingParen(tokens, 1);
+      size_t closingParenIdx = nextTokenOutsideParens(tokens, 0) - 1;
+      //std::cout << closingParenIdx << std::endl;
       if (closingParenIdx == tokens.size()) return new SExp(Error("missing closing paren"));
 
       vector<Token> nextItemTokens(tokens.begin(), tokens.begin() + closingParenIdx + 1);
