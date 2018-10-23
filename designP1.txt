@@ -1,0 +1,8 @@
+Design:
+The interpreter so far is designed to take a string representing an s-expression in dot notation or list notation and reresent it interally in a parsed structure. It then outputs the internal representation into a dot notation s-expression.
+
+It does this by reading in a string and tokenizing it into a sequence of tokens. For a dot notation, The input routine recursively calls itself of the expressions on the left half and right half of the dot. If it is a list notation, a seperate input routine calls input for each item within the list, and builds it into the lisp list structure. The output routine is very simple. It prints ids and numbers, and recursively calls the output routine for nonatomic s-expressions, wrapping them in parentheses. Also note that before it does this, it finds any errors that may have occured in the input, and outputs those instead of an s-expression if there are any errors present.
+
+
+Acknowledgements:
+There tokenization function I use (tokenizeToStrs) was inspired by an answer to a stack overflow question (https://stackoverflow.com/a/1514113). I did not use this function verbatim, the function in the answer was slightly broken and I had differing requirements than the person who answered the questions so I had to write my own accordingly.

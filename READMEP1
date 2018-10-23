@@ -1,0 +1,5 @@
+### Compiling
+In order to compile part 1 of the project, type `make`. This will compile the interpreter into the executable "main". If you would like to rebuild, run `make clean`, and then `make`.
+
+### Running
+After compiling, you will have the executable "main". to run the executable, type `./main`. Then, you can give the interpreter input through stdin. The interpreter will read what you type as a single s-expression until a return followed by a $, and then another return is typed. To execute what has been typed so far and exit, type return followed by $$ and then another return. In order to pass in a file, type `./main yourfilename`. The interperter will treat every thing leading up to a line with a $ as a single s-expression. You end the file with $$, just like you end input through stdin without providing a file. See test.txt for an example of the file format accepted.

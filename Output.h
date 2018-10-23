@@ -3,15 +3,12 @@
  *
  *       Filename:  Output.h
  *
- *    Description:  
- *
  *        Version:  1.0
  *        Created:  10/21/2018 14:11:11
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  YOUR NAME (), 
- *   Organization:  
+ *         Author:   Codi Burley,
  *
  * =====================================================================================
  */

@@ -10,8 +10,7 @@
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  YOUR NAME (), 
- *   Organization:  
+ *         Author:  Codi Burley, 
  *
  * =====================================================================================
  */
@@ -59,8 +58,7 @@ vector<string> tokenizeToStrs(const string& strInput, const string& strDelims) {
  size_t startpos = 0;
  size_t pos = strOne.find_first_of(delimiters, startpos);
 
- while (string::npos != pos && string::npos != startpos)
- {
+ while (string::npos != pos && string::npos != startpos) {
   if(strOne.substr(startpos, pos - startpos) != "" && !isWhite(strOne.substr(startpos, pos - startpos)))
    vS.push_back(strOne.substr(startpos, pos - startpos));
 
