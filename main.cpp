@@ -11,10 +11,6 @@ using std::string;
 using std::vector;
 
 int main() {
-  //string testStr = "((3 . func) . (1 . hello) . 4)";
-  //string testStr1 = "(hey. (sister . (brother . mother )))";
-  //string testL = "((hey hoe) . 3)";
-  //SExp* s = input(testL);
   string readStr;
   string expStr = "";
   while (std::getline(std::cin, readStr)) {
@@ -35,9 +31,5 @@ int main() {
     }
     expStr = expStr + " " + readStr;
   }
-  //std::cout << "SExp symbol: " << std::endl;
-  //if (s->type == Symbol) {
-  //  std::cout << s->name << std::endl;
-  //}
   return 0;
 }

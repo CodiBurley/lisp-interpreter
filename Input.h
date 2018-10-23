@@ -42,6 +42,7 @@ SExp* input(string s);
 SExp* input(vector<Token> tokens);
 SExp* inputList(vector<Token> tokens);
 
+
 void printTokens(vector<Token> tokens) {
   for (Token t: tokens) {
     std::cout << "'"<< t.value << "' ";
@@ -79,8 +80,18 @@ vector<string> tokenizeToStrs(const string& strInput, const string& strDelims) {
 
 bool isNumber(const std::string& s) {
     std::string::const_iterator it = s.begin();
+    if (s.size() > 1 && (s.at(0) == '+' || s.at(0) == '-')) {
+      ++it;
+    }
     while (it != s.end() && std::isdigit(*it)) ++it;
     return !s.empty() && it == s.end();
+}
+
+bool validID(string str)
+{
+    return str.size() > 0 &&
+      !isNumber(str.substr(0,1)) &&
+      find_if(str.begin(), str.end(), [](char c) { return !(isalnum(c) || (c == ' ')); }) == str.end();
 }
 
 vector<Token> tokenStringsToTokenEnums(vector<string> strs) {
@@ -91,7 +102,8 @@ vector<Token> tokenStringsToTokenEnums(vector<string> strs) {
     else if (s == ".") return Token(Dot, s);
     else if (s == " " || s == "\t" || s == "\r" || s == "\n") return Token(White, s);
     else if (isNumber(s)) return Token(Num, s);
-    else return Token(ID, s);
+    else if (validID(s)) return Token(ID, s);
+    else return Token(Invalid, s);
   });
   return enums;
 }
