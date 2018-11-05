@@ -1,0 +1,6053 @@
+In apply: CAR
+((A . B) . NIL)
+res for (CAR . ((QUOTE . ((A . B) . NIL)) . NIL)) is: A
+in: (CAR (QUOTE (A . B)))
+> A
+In apply: CONS
+(4 . ((A . B) . NIL))
+res for (CONS . (4 . ((QUOTE . ((A . B) . NIL)) . NIL))) is: (4 . (A . B))
+in: (CONS 4 (QUOTE (A . B)))
+> (4 . (A . B))
+In apply: A
+**error**: cannot evaluate B as a list
+res for (A . B) is: **error**: cannot evaluate B as a list
+In apply: CONS
+**error**: cannot evaluate B as a list
+res for (CONS . (4 . ((A . B) . NIL))) is: **error**: cannot evaluate B as a list
+in: (CONS 4 (A . B))
+> **error**: cannot evaluate B as a list
+in: (DEFUN (SILLY (A B)) (PLUS A B))
+> (DEFUN . ((SILLY . ((A . (B . NIL)) . NIL)) . ((PLUS . (A . (B . NIL))) . NIL)))
+In apply: SILLY
+(5 . (6 . NIL))
+In apply: PLUS
+(5 . (6 . NIL))
+res for (PLUS . (A . (B . NIL))) is: 11
+res for (SILLY . (5 . (6 . NIL))) is: 11
+in: (SILLY 5 6)
+> 11
+In apply: CAR
+((5 . 6) . NIL)
+res for (CAR . ((QUOTE . ((5 . 6) . NIL)) . NIL)) is: 5
+In apply: CDR
+((5 . 6) . NIL)
+res for (CDR . ((QUOTE . ((5 . 6) . NIL)) . NIL)) is: 6
+In apply: SILLY
+(5 . (6 . NIL))
+In apply: PLUS
+(5 . (6 . NIL))
+res for (PLUS . (A . (B . NIL))) is: 11
+res for (SILLY . ((CAR . ((QUOTE . ((5 . 6) . NIL)) . NIL)) . ((CDR . ((QUOTE . ((5 . 6) . NIL)) . NIL)) . NIL))) is: 11
+in: (SILLY (CAR (QUOTE (5 . 6))) (CDR (QUOTE (5 . 6))) )
+> 11
+in: (DEFUN (MINUS2 (A B)) (MINUS A B))
+> (DEFUN . ((MINUS2 . ((A . (B . NIL)) . NIL)) . ((MINUS . (A . (B . NIL))) . NIL)))
+in: (DEFUN (NOTSOSILLY (A B)) 				(COND					 ((EQ A 0) (PLUS B 1))					 ((EQ B 0) (NOTSOSILLY (MINUS2 A 1) 1))					 (T (NOTSOSILLY (MINUS2 A 1) (NOTSOSILLY A (MINUS2 B 1))))				 ))
+> (DEFUN . ((NOTSOSILLY . ((A . (B . NIL)) . NIL)) . ((COND . (((EQ . (A . (0 . NIL))) . ((PLUS . (B . (1 . NIL))) . NIL)) . (((EQ . (B . (0 . NIL))) . ((NOTSOSILLY . ((MINUS2 . (A . (1 . NIL))) . (1 . NIL))) . NIL)) . ((T . ((NOTSOSILLY . ((MINUS2 . (A . (1 . NIL))) . ((NOTSOSILLY . (A . ((MINUS2 . (B . (1 . NIL))) . NIL))) . NIL))) . NIL)) . NIL)))) . NIL)))
+In apply: NOTSOSILLY
+(0 . (0 . NIL))
+In apply: EQ
+(0 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: T
+In apply: PLUS
+(0 . (1 . NIL))
+res for (PLUS . (B . (1 . NIL))) is: 1
+res for (NOTSOSILLY . (0 . (0 . NIL))) is: 1
+in: (NOTSOSILLY 0 0)
+> 1
+In apply: NOTSOSILLY
+(1 . (1 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (B . (1 . NIL))) is: 0
+In apply: NOTSOSILLY
+(1 . (0 . NIL))
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (A . (0 . NIL))) is: NIL
+In apply: EQ
+(1 . (0 . NIL))
+res for (EQ . (B . (0 . NIL))) is: NIL
+In apply: MINUS2
+(1 . (1 . NIL))
+In apply: MINUS
+(1 . (1 . NIL))
+res for (MINUS . (A . (B . NIL))) is: 0
+res for (MINUS2 . (A . (1 . NIL))) is: 0
+In apply: MINUS2
+(1 . (1 . NIL))

@@ -1,0 +1,6 @@
+(DEFUN (TESTATOM (X)) (ATOM X))
+$
+(TESTATOM 6)
+$
+(TESTATOM (QUOTE (3 . 2)))
+$$

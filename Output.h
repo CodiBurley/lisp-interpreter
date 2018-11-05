@@ -1,3 +1,6 @@
+#ifndef OUTPUT_H
+#define OUTPUT_H
+
 /*
  * =====================================================================================
  *
@@ -58,3 +61,5 @@ string output(SExp* sexp) {
 
   return outputNoErrors(sexp);
 }
+
+#endif
